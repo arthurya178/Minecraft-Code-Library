@@ -100,7 +100,7 @@ namespace Minecraft_Mod
             if (comboBox1.Text != "Choose Modpack")
             {
                 label2.Text = "--ModPack-- " + comboBox1.Text;
-                pictureBox1.Image = Image.FromFile(Path.Combine(Path_loc, "lib", comboBox1.Text, "mod.jpg"));
+                pictureBox1.Image = Image.FromFile(Path.Combine(Path_loc, "libra", comboBox1.Text, "mod.jpg"));
                 button2.Visible = true;
             }
             
@@ -123,7 +123,7 @@ namespace Minecraft_Mod
             form2.Visible = false;
             
             System.Threading.Thread.Sleep(60000);
-            json.Check_Set_end(comboBox1.Text,form2.System_path,Forge_V[ver]);
+            json.Check_Set_end(comboBox1.Text,form2.System_path);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

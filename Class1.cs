@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IWshRuntimeLibrary;
+using System.Windows.Forms;
 
 namespace Minecraft_Mod
 {
@@ -13,11 +14,11 @@ namespace Minecraft_Mod
         public void Create_Launcher_Profile(string Mod_Name,string JVM,string path,string forge,string modpack_path = "Core\\CoreFile\\")
         {
             string JVM_CLP = locate_reset(JVM);
-            string path_CLP = locate_reset(path) + "\\\\" +"lib" + "\\\\" + Mod_Name;
+            string path_CLP = locate_reset(path) + "\\\\" +"libra" + "\\\\" + Mod_Name;
             string B_side = Create_Json(Mod_Name, path_CLP, JVM_CLP, forge);
-            if (System.IO.File.Exists(Path.Combine(path_CLP, "launcher_profiles.json")))
+            if (System.IO.File.Exists(Path.Combine(path, "libra", Mod_Name, "launcher_profiles.json")) && System.IO.Directory.Exists(Path.Combine(path, "Core", "CoreFIle")))
             {
-                System.IO.File.Copy(Path.Combine(path_CLP, "launcher_profiles.json"), Path.Combine(path, "Core", "CoreFIle", "launcher_profiles.json"),true);
+                System.IO.File.Copy(Path.Combine(path,"libra",Mod_Name, "launcher_profiles.json"), Path.Combine(path, "Core", "CoreFIle", "launcher_profiles.json"),true);
             }
             else
             {
@@ -91,13 +92,11 @@ namespace Minecraft_Mod
                 sw123.Write(data);
             }
         }
-        public void Check_Set_end(string version,string Core_path, string F_ver)
+        public void Check_Set_end(string version,string Core_path)
         {
-            if(System.IO.File.Exists(Path.Combine(Core_path, "Core", "CoreFIle", "launcher_profiles.json")) && 
-               System.IO.File.Exists(Path.Combine(Core_path,"lib", version, "launcher_profiles.json")))
-            {
-                
-                System.IO.File.Copy( Path.Combine(Core_path, "Core", "CoreFIle", "launcher_profiles.json"), Path.Combine(Core_path,"lib",version,"launcher_profiles.json"),true);
+            if (System.IO.File.Exists(Path.Combine(Core_path, "Core", "CoreFIle", "launcher_profiles.json")) && Directory.Exists(Path.Combine(Core_path,"libra", version)))
+            {               
+                System.IO.File.Copy( Path.Combine(Core_path, "Core", "CoreFIle", "launcher_profiles.json"), Path.Combine(Core_path,"libra",version,"launcher_profiles.json"),true);
             }
         }
     }
