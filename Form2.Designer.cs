@@ -32,8 +32,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.JVM = new System.Windows.Forms.TextBox();
-            this.File_path = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -76,23 +74,6 @@
             this.JVM.Size = new System.Drawing.Size(221, 22);
             this.JVM.TabIndex = 5;
             // 
-            // File_path
-            // 
-            this.File_path.Location = new System.Drawing.Point(157, 139);
-            this.File_path.Name = "File_path";
-            this.File_path.Size = new System.Drawing.Size(221, 22);
-            this.File_path.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("新細明體", 12F);
-            this.label2.Location = new System.Drawing.Point(42, 139);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 16);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Install Path:";
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -101,8 +82,6 @@
             this.Controls.Add(this.JVM);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.File_path);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form2";
             this.Text = "Advence Setting";
@@ -118,7 +97,5 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox JVM;
-        private System.Windows.Forms.TextBox File_path;
-        private System.Windows.Forms.Label label2;
     }
 }

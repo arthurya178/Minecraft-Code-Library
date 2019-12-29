@@ -10,12 +10,19 @@ namespace Minecraft_Mod
 {
     class Class1
     {
-        public void Create_Launcher_Profile(string Mod_Name,string JVM,string path,string forge)
+        public void Create_Launcher_Profile(string Mod_Name,string JVM,string path,string forge,string modpack_path = "Core\\CoreFile\\")
         {
             string JVM_CLP = locate_reset(JVM);
-            string path_CLP = locate_reset(path) + "\\\\" + Mod_Name;
+            string path_CLP = locate_reset(path) + "\\\\" +"lib" + "\\\\" + Mod_Name;
             string B_side = Create_Json(Mod_Name, path_CLP, JVM_CLP, forge);
-            to_Json(B_side,"");
+            if (System.IO.File.Exists(Path.Combine(path_CLP, "launcher_profiles.json")))
+            {
+                System.IO.File.Copy(Path.Combine(path_CLP, "launcher_profiles.json"), Path.Combine(path, "Core", "CoreFIle", "launcher_profiles.json"),true);
+            }
+            else
+            {
+                to_Json(B_side, modpack_path);
+            }
         }
 
         private string locate_reset(string line)
@@ -77,11 +84,20 @@ namespace Minecraft_Mod
                 $"}}";
             return line;
         }
-        private void to_Json(string data,string location)
+        private void to_Json(string data,string location )
         {
             using (StreamWriter sw123 = new StreamWriter(Path.Combine(location, "launcher_profiles.json")))
             {
                 sw123.Write(data);
+            }
+        }
+        public void Check_Set_end(string version,string Core_path, string F_ver)
+        {
+            if(System.IO.File.Exists(Path.Combine(Core_path, "Core", "CoreFIle", "launcher_profiles.json")) && 
+               System.IO.File.Exists(Path.Combine(Core_path,"lib", version, "launcher_profiles.json")))
+            {
+                
+                System.IO.File.Copy( Path.Combine(Core_path, "Core", "CoreFIle", "launcher_profiles.json"), Path.Combine(Core_path,"lib",version,"launcher_profiles.json"),true);
             }
         }
     }

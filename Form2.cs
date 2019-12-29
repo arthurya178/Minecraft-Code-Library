@@ -19,7 +19,6 @@ namespace Minecraft_Mod
         {
             InitializeComponent();
             default_set();
-            File_path.Text = System_path;
             JVM.Text = JVM_argument;
         }
 
@@ -71,7 +70,6 @@ namespace Minecraft_Mod
         }
         private void save_file()
         {
-            System_path = File_path.Text;
             JVM_argument = JVM.Text;
         }
 

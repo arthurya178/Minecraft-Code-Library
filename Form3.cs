@@ -62,16 +62,19 @@ namespace Minecraft_Mod
                     {
                         long time = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
                         time += 604800;
+                        //time += 150;
                         Sw.WriteLine("PCU::" + PCU);
                         Sw.WriteLine("account::" + Account[login]);
                         Sw.WriteLine("TCU::" + time);
                         MessageBox.Show("Succesful extend your licence for 7 day!!!");
+                        this.Close();
                     }
                 }
                 else
                 {
                     MessageBox.Show("Wrong Account or password", "Warnning", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
+                
             }
             else
             {

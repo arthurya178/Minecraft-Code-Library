@@ -15,9 +15,9 @@ namespace Minecraft_Mod
     public partial class Form1 : Form
     {
         public object[] Version = new object[] { "[Pandora]Einstan" , "[Pandora]Tesla" };
-        public string[] Forge_V = new string[] { "forge-14.23.5.2796", "1.1------------------6.2" };
+        public string[] Forge_V = new string[] { "1.15.1", "1.6.2" };
         public string Path_loc = System.IO.Directory.GetCurrentDirectory();
-
+        protected int ver = 0;
         static Form2 form2;
         Class1 json = new Class1();
         public Form1()
@@ -101,6 +101,7 @@ namespace Minecraft_Mod
             {
                 label2.Text = "--ModPack-- " + comboBox1.Text;
                 pictureBox1.Image = Image.FromFile(Path.Combine(Path_loc, "lib", comboBox1.Text, "mod.jpg"));
+                button2.Visible = true;
             }
             
         }
@@ -118,6 +119,11 @@ namespace Minecraft_Mod
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             form2.Close();
+            this.Visible = false;
+            form2.Visible = false;
+            
+            System.Threading.Thread.Sleep(60000);
+            json.Check_Set_end(comboBox1.Text,form2.System_path,Forge_V[ver]);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -135,26 +141,26 @@ namespace Minecraft_Mod
         private void button2_Click_1(object sender, EventArgs e)
         {
             bool check_licence = Safe_Check();
-            if (check_licence)
+            if (comboBox1.Text != "Choose Modpack")
             {
-                int ver = 0;
-                for (int i = 0; i < Forge_V.Length; i++)
+                if (check_licence)
                 {
-                    if (Version[i].ToString() == comboBox1.Text)
-                        ver = i;
-                }
-                json.Create_Launcher_Profile(comboBox1.Text, form2.JVM_argument, Path.Combine(form2.System_path,"Core","CoreFile"), Forge_V[ver]);
-                try
-                {
-                    Process.Start(form2.System_path + "\\Core\\minecraftLauncher.exe");
-                }
-                catch(Exception ex)
-                { 
-                }
-            }
-            else
-            {
+                    ver = 0;
+                    for (int i = 0; i < Forge_V.Length; i++)
+                    {
+                        if (Version[i].ToString() == comboBox1.Text)
+                            ver = i;
+                    }
+                    json.Create_Launcher_Profile(comboBox1.Text, form2.JVM_argument, form2.System_path, Forge_V[ver]);
 
+                    Process.Start(Path.Combine(form2.System_path, "core", "start.bat"));
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Please Update your licence!!!!", "Warnning", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                
             }
 
         }
